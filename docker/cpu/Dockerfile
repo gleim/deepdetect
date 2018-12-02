@@ -12,6 +12,9 @@ RUN useradd -ms /bin/bash dd
 
 RUN apt-get update && apt-get install -y git cmake build-essential libgoogle-glog-dev libgflags-dev libeigen3-dev libopencv-dev libcppnetlib-dev libboost-dev libboost-iostreams-dev libcurl4-openssl-dev protobuf-compiler libopenblas-dev libhdf5-dev libprotobuf-dev libleveldb-dev libsnappy-dev liblmdb-dev libutfcpp-dev wget unzip libspdlog-dev python-setuptools python-dev
 
+WORKDIR /etc/nginx/
+RUN git clone https://github.com/schickling/dockerfiles/
+RUN cp dockerfiles/thumbor-nginx-cors/nginx.conf /etc/nginx/
 WORKDIR /opt
 RUN git clone https://github.com/jpbarrette/curlpp.git
 WORKDIR /opt/curlpp
@@ -47,5 +50,6 @@ RUN chown -R dd:dd /opt/models
 
 USER dd
 WORKDIR /opt/deepdetect/build/main
-CMD ./dede -host 0.0.0.0
+
+CMD ./dede -host 0.0.0.0 
 EXPOSE 8080

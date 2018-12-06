@@ -51,5 +51,5 @@ RUN chown -R dd:dd /opt/models
 USER dd
 WORKDIR /opt/deepdetect/build/main
 
-CMD ./dede -host 0.0.0.0 
+CMD ./dede -host 0.0.0.0 -allow_origin "*"
 EXPOSE 8080
